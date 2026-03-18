@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "hide-links-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/hideLinks/HideLinksCommandSet.js",
+          "manifest": "./src/extensions/hideLinks/HideLinksCommandSet.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HideLinksCommandSetStrings": "lib/extensions/hideLinks/loc/{locale}.js"
+  }
+}

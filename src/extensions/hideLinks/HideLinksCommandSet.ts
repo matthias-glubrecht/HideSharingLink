@@ -44,6 +44,9 @@ export default class HideLinksCommandSet extends BaseListViewCommandSet<IHideLin
       li.ms-ContextualMenu-item:has(button[name="Share"]), li.ms-ContextualMenu-item:has(button[name="Teilen"]) {
         display: none!important;
       }
+      div.ms-TooltipHost:has(i[data-icon-name="Share"]) {
+        display: none!important;
+      }
     `;
     head.appendChild(style);
   }

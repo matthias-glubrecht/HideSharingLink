@@ -72,3 +72,10 @@ $site.DenyPermissionsMask = $site.DenyPermissionsMask -band (-bnot [Microsoft.Sh
 | `sharepoint/assets/HideGetSharingLink.js` | ScriptLink für klassische Seiten |
 | `src/Powershell/` | Installations- und Verwaltungsskripte |
 | `config/package-solution.json` | SPFx-Paketkonfiguration |
+
+## Versionsverlauf
+
+| Version | Datum | Beschreibung |
+|---|---|---|
+| 1.1.0 | 2026-04-01 | Versionsanhebung auf 1.1.0 |
+| 1.0.0 | — | Erstveröffentlichung |

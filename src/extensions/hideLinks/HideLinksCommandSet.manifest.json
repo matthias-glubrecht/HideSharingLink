@@ -1,6 +1,5 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/command-set-extension-manifest.schema.json",
-
   "id": "ae7dba38-6364-4819-8f47-774599e3cee9",
   "alias": "HideLinksCommandSet",
   "componentType": "Extension",
@@ -8,7 +7,6 @@
   "version": "*",
   "manifestVersion": 2,
   "requiresCustomScript": false,
-
   "items": {
     "HIDDEN_COMMAND": {
       "title": { "default": "Hidden" },

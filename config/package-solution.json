@@ -1,24 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
+    "title": "Freigabelinks ausblenden",
     "name": "hide-sharing-link-client-side-solution",
     "id": "c959a247-1ad1-4d31-ac20-b9957ac8cb47",
-    "version": "1.1.0.0",
+    "version": "1.1.1.0",
     "includeClientSideAssets": true,
-    "skipFeatureDeployment": true,
-    "features": [
-      {
-        "title": "Application Extension - Deployment of custom action.",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "5766dfb3-9b76-487a-8eb7-eb5482f7f855",
-        "version": "1.1.0.0",
-        "assets": {
-          "elementManifests": [
-            "elements.xml"
-          ]
-        }
-      }
-    ]
+    "skipFeatureDeployment": true
   },
   "paths": {
     "zippedPackage": "solution/hide-sharing-link.sppkg"

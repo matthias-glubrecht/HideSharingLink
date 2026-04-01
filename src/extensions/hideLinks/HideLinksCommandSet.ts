@@ -14,6 +14,8 @@ const LOG_SOURCE: string = 'HideLinksCommandSet';
 
 export default class HideLinksCommandSet extends BaseListViewCommandSet<IHideLinksCommandSetProperties> {
 
+  private static readonly STYLE_ID: string = 'Rumpelstilzchen-3245034073';
+
   @override
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized HideLinksCommandSet');
@@ -34,9 +36,13 @@ export default class HideLinksCommandSet extends BaseListViewCommandSet<IHideLin
     // no-op
   }
 
-  private applyCSSUpdate(): void {
+   private applyCSSUpdate(): void {
+    if (document.getElementById(HideLinksCommandSet.STYLE_ID)) {
+      return;
+    }
     const head: HTMLHeadElement = document.getElementsByTagName('head')[0] as HTMLHeadElement;
     const style: HTMLStyleElement = document.createElement('style') as HTMLStyleElement;
+    style.id = HideLinksCommandSet.STYLE_ID;
     style.innerHTML = `
       div.CommandBarItem:has(i[data-icon-name="Share"]) {
         display: none!important;

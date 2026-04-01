@@ -77,5 +77,6 @@ $site.DenyPermissionsMask = $site.DenyPermissionsMask -band (-bnot [Microsoft.Sh
 
 | Version | Datum | Beschreibung |
 |---|---|---|
+| 1.1.1 | 2026-04-01 | Fix: Style-Tag wurde mehrfach injiziert |
 | 1.1.0 | 2026-04-01 | Versionsanhebung auf 1.1.0 |
 | 1.0.0 | — | Erstveröffentlichung |

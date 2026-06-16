@@ -15,7 +15,10 @@
     window.addEventListener('DOMContentLoaded', () => {
         injectCSS(`
             li#lnkGetLnkItem {
-                display: none!important;
+                display: none !important;
+            }
+            li:has(a#ID_GetLink) {
+                display: none !important;
             }
         `);
     });

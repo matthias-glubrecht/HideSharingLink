@@ -4,7 +4,7 @@
     "title": "Freigabelinks ausblenden",
     "name": "hide-sharing-link-client-side-solution",
     "id": "c959a247-1ad1-4d31-ac20-b9957ac8cb47",
-    "version": "1.2.0.0",
+    "version": "1.2.1.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true
   },

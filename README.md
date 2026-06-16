@@ -2,7 +2,7 @@
 
 SPFx-Lösung für SharePoint 2019, die den "Teilen"/"Share"-Button in Dokumentbibliotheken ausblendet.
 
-**Aktuelle Version:** 1.2.0
+**Aktuelle Version:** 1.2.1
 
 ## Funktionsweise
 
@@ -113,6 +113,7 @@ $site.DenyPermissionsMask = $site.DenyPermissionsMask -band (-bnot [Microsoft.Sh
 
 | Version | Datum | Beschreibung |
 |---|---|---|
+| 1.2.1 | 2026-06-16 | PowerShell-Skripte: `credentials`-Parameter auf Typ `ICredentials` umgestellt — ohne Angabe greift nun die integrierte Authentifizierung des angemeldeten Windows-Benutzers; Parameterdokumentation ergänzt. Kleinere CSS-Formatierung im ScriptLink-Asset. |
 | 1.2.0 | 2026-05-07 | Schutz gegen doppelte CSS-Injection im klassischen ScriptLink-Asset (`HideGetSharingLink.js`) |
 | 1.1.1 | 2026-04-01 | Fix: Style-Tag wurde mehrfach injiziert |
 | 1.1.0 | 2026-04-01 | Versionsanhebung auf 1.1.0 |

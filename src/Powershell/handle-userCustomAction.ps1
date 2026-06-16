@@ -27,6 +27,14 @@
 .PARAMETER registrationType
     Der RegistrationType für die ListViewCommandSet Custom Action (z.B. "List", "ContentType", "ProgId", "FileExtension").
 
+.PARAMETER credentials
+    Die Anmeldeinformationen für die Verbindung zur SharePoint-Websitesammlung (Typ System.Net.ICredentials).
+    Akzeptiert ein PSCredential (z. B. das Ergebnis von (Get-Credential)), das PowerShell automatisch
+    in ein System.Net.NetworkCredential umwandelt, oder ein beliebiges ICredentials-Objekt wie
+    [System.Net.CredentialCache]::DefaultCredentials für die integrierte Authentifizierung des aktuell
+    angemeldeten Windows-Benutzers. Der Parameter ist obligatorisch; fehlt er, fordert PowerShell ihn
+    interaktiv an.
+
 .EXAMPLE
     .\handle-userCustomAction.ps1 -siteCollectionUrl "https://sharepoint.contoso.local" -action Add -scriptSrc "~site/SiteAssets/HideGetSharingLink.js"
 
@@ -60,33 +68,45 @@ param (
 
     [Parameter(Mandatory, ParameterSetName = 'ListViewCommandSet')]
     [ValidateSet('List', 'ContentType', 'ProgId', 'FileExtension')]
-    [string]$registrationType
+    [string]$registrationType,
+
+    [Parameter(Mandatory)]
+    [System.Net.ICredentials]$credentials
 )
+
 
 try
 {
-    Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll"
-    Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll"
+    Add-Type -Path "C:\Source\SP2019\Assemblies\Microsoft.SharePoint.Client.dll"
+    Add-Type -Path "C:\Source\SP2019\Assemblies\Microsoft.SharePoint.Client.Runtime.dll"
 }
 catch
 {
     try
     {
-        Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.dll"
-        Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.Runtime.dll"
+        Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll"
+        Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll"
     }
     catch
     {
         try
         {
-            Add-Type -Path "$PSScriptRoot\Microsoft.SharePoint.Client.dll"
-            Add-Type -Path "$PSScriptRoot\Microsoft.SharePoint.Client.Runtime.dll"
+            Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.dll"
+            Add-Type -Path "C:\program files\Common Files\microsoft shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.Runtime.dll"
         }
         catch
         {
-            Write-Host "Die SharePoint-Client-DLLs wurden nciht gefunden." -ForegroundColor Red
-            Write-Host $_.Exception.Message -ForegroundColor Red;
-            return;
+            try
+            {
+                Add-Type -Path "$PSScriptRoot\Microsoft.SharePoint.Client.dll"
+                Add-Type -Path "$PSScriptRoot\Microsoft.SharePoint.Client.Runtime.dll"
+            }
+            catch
+            {
+                Write-Host "Die SharePoint-Client-DLLs wurden nicht gefunden." -ForegroundColor Red
+                Write-Host $_.Exception.Message -ForegroundColor Red;
+                return;
+            }
         }
     }
 }
@@ -285,7 +305,7 @@ function Remove-ListViewCommandSetCustomAction(
 }
 
 $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($siteCollectionUrl)
-$ctx.Credentials = [System.Net.CredentialCache]::DefaultCredentials
+$ctx.Credentials = $credentials
 
 switch ($PSCmdlet.ParameterSetName) {
     'ScriptLink' {
